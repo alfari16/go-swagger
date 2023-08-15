@@ -1,0 +1,25 @@
+layout:
+  models:
+    - name: definition
+      source: asset:model
+      target: "{{ joinFilePath .Target .ModelPackage }}"
+      file_name: "{{ (snakize (pascalize .Name)) }}.go"
+  operations:
+    - name: parameters
+      source: asset:serverParameter
+      target: "{{ joinFilePath .Target .ServerPackage .Package }}"
+      file_name: "{{ (snakize (pascalize .Name)) }}_parameters.go"
+    - name: handler
+      source: asset:serverOperation
+      target: "{{ joinFilePath .Target .ServerPackage .Package  }}"
+      file_name: "{{ (snakize (pascalize .Name)) }}.go"
+    - name: responses
+      source: asset:serverResponses
+      target: "{{ joinFilePath .Target .ServerPackage .Package  }}"
+      file_name: "{{ (snakize (pascalize .Name)) }}_responses.go"
+  application:
+    - name: builder
+      source: asset:serverBuilder
+      target: "{{ joinFilePath .Target .ServerPackage }}"
+      file_name: "common.go"
+

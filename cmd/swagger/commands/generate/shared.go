@@ -205,15 +205,10 @@ func createSwagger(s sharedCommand) error {
 
 func readConfig(filename string) (*viper.Viper, error) {
 	if filename == "" {
-		return nil, nil
+		filename = generator.DefaultConfigFile
 	}
 
-	abspath, err := filepath.Abs(filename)
-	if err != nil {
-		return nil, err
-	}
-	log.Println("trying to read config from", abspath)
-	return generator.ReadConfig(abspath)
+	return generator.ReadConfig(filename)
 }
 
 func configureOptsFromConfig(cfg *viper.Viper, opts *generator.GenOpts) error {
